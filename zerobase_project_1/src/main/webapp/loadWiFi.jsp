@@ -1,4 +1,5 @@
 <%@ page import="com.example.zerobase_project_1.servlet.PublicWiFiAPI" %>
+<%@ page import="com.example.zerobase_project_1.db.DbController" %>
 <%@ page import="com.example.zerobase_project_1.domain.RowList" %><%--
   Created by IntelliJ IDEA.
   User: USER
@@ -11,32 +12,30 @@
 <html>
 <head>
     <meta content="text/html; charset=UTF-8" />
-    <title>Title</title>
+    <title>공공와이파이 정보 저장 성공!</title>
 </head>
 <body>
     <%
         PublicWiFiAPI publicWiFiAPI = new PublicWiFiAPI();
-        publicWiFiAPI.GetPublicWiFiOpenAPI();
+        DbController dbController = new DbController();
+        String startIdx = "1";
+        String endIdx = "1000";
+        for (int i = 0; i < 18; i++) {
+            publicWiFiAPI.GetPublicWiFiOpenAPI(startIdx, endIdx);
+            publicWiFiAPI.getItemList();
 
-        publicWiFiAPI.getItemList();
-        for (RowList rowList : publicWiFiAPI.newList) {
-            out.write("<p>" + rowList.getX_SWIFI_MGR_NO() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_WRDOFC() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_MAIN_NM() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_ADRES1() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_ADRES2() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_INSTL_FLOOR() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_INSTL_TY() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_INSTL_MBY() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_SVC_SE() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_CMCWR() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_CNSTC_YEAR() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_INOUT_DOOR() + "</p>");
-            out.write("<p>" + rowList.getX_SWIFI_REMARS3() + "</p>");
-            out.write("<p>" + rowList.getLAT() + "</p>");
-            out.write("<p>" + rowList.getLNT() + "</p>");
-            out.write("<p>" + rowList.getWORK_DTTM() + "</p>");
+            for (RowList a : publicWiFiAPI.newList) {
+                dbController.dbInsert(a.getX_SWIFI_MGR_NO(), a.getX_SWIFI_WRDOFC(), a.getX_SWIFI_ADRES1(),
+                        a.getX_SWIFI_ADRES2(), a.getX_SWIFI_INSTL_FLOOR(), a.getX_SWIFI_INSTL_TY(), a.getX_SWIFI_INSTL_TY(),
+                        a.getX_SWIFI_INSTL_MBY(), a.getX_SWIFI_SVC_SE(), a.getX_SWIFI_CMCWR(), a.getX_SWIFI_CNSTC_YEAR(),
+                        a.getX_SWIFI_INOUT_DOOR(), a.getX_SWIFI_REMARS3(), a.getLAT(), a.getLNT(), a.getWORK_DTTM());
+            }
+            startIdx = String.valueOf(Integer.parseInt(startIdx) + 1000);
+            endIdx = String.valueOf(Integer.parseInt(endIdx) + 1000);
         }
+
+        out.write("와이파이 정보 " + publicWiFiAPI.count + "개를 DB에 저장했습니다.");
     %>
+    <a href="hello.jsp">홈으로</a>
 </body>
 </html>

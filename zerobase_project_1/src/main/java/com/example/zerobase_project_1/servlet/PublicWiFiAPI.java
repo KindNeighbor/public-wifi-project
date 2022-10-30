@@ -16,14 +16,16 @@ public class PublicWiFiAPI {
 
     public String json;
     public ArrayList<RowList> newList;
-    public void GetPublicWiFiOpenAPI() throws IOException {
+    public String count;
+
+    public void GetPublicWiFiOpenAPI(String startIdx, String endIdx) throws IOException {
 
         StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
         urlBuilder.append("/" +  URLEncoder.encode("6d50594c597a6572353466536c6361","UTF-8") );
         urlBuilder.append("/" +  URLEncoder.encode("json","UTF-8") );
         urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo","UTF-8"));
-        urlBuilder.append("/" + URLEncoder.encode("1","UTF-8"));
-        urlBuilder.append("/" + URLEncoder.encode("5","UTF-8"));
+        urlBuilder.append("/" + URLEncoder.encode(startIdx,"UTF-8"));
+        urlBuilder.append("/" + URLEncoder.encode(endIdx,"UTF-8"));
 
         urlBuilder.append("/" + URLEncoder.encode("20220301","UTF-8"));
 
@@ -57,6 +59,8 @@ public class PublicWiFiAPI {
 
         Gson gson = new Gson();
         Item item = gson.fromJson(json, Item.class);
+
+        count = item.getTbPublicWifiInfo().getList_total_count();
 
         newList = new ArrayList<>();
         for (RowList a : item.getTbPublicWifiInfo().getRow()) {

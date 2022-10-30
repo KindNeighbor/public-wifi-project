@@ -1,8 +1,8 @@
 package com.example.zerobase_project_1;
 
+import com.example.zerobase_project_1.db.DbController;
 import com.example.zerobase_project_1.domain.Item;
 import com.example.zerobase_project_1.domain.RowList;
-import com.example.zerobase_project_1.domain.WiFiInfo;
 import com.google.gson.*;
 
 import java.io.BufferedReader;
@@ -23,7 +23,7 @@ public class Test {
         urlBuilder.append("/" +  URLEncoder.encode("json","UTF-8") );
         urlBuilder.append("/" + URLEncoder.encode("TbPublicWifiInfo","UTF-8"));
         urlBuilder.append("/" + URLEncoder.encode("1","UTF-8"));
-        urlBuilder.append("/" + URLEncoder.encode("2","UTF-8"));
+        urlBuilder.append("/" + URLEncoder.encode("60","UTF-8"));
 
         urlBuilder.append("/" + URLEncoder.encode("20220301","UTF-8"));
 
@@ -49,13 +49,17 @@ public class Test {
         json1 = sb.toString();
         rd.close();
         conn.disconnect();
-        System.out.println(sb.toString());
+//        System.out.println(sb.toString());
         Test test1 = new Test();
-        test1.getItemList();
-        System.out.println(newList1);
+        test1.getItemList1();
+//        System.out.println(newList1);
+
+        DbController dbController = new DbController();
+//        dbController.dbInsert();
+//        dbController.dbDelete();
     }
 
-    public void getItemList() {
+    public void getItemList1() {
 
         Gson gson = new Gson();
         Item item = gson.fromJson(json1, Item.class);
