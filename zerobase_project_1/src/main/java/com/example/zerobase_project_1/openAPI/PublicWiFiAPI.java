@@ -1,4 +1,4 @@
-package com.example.zerobase_project_1.servlet;
+package com.example.zerobase_project_1.openAPI;
 
 import com.example.zerobase_project_1.domain.Item;
 import com.example.zerobase_project_1.domain.RowList;

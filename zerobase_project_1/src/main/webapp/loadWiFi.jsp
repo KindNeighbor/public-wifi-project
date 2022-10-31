@@ -1,4 +1,4 @@
-<%@ page import="com.example.zerobase_project_1.servlet.PublicWiFiAPI" %>
+<%@ page import="com.example.zerobase_project_1.openAPI.PublicWiFiAPI" %>
 <%@ page import="com.example.zerobase_project_1.db.DbController" %>
 <%@ page import="com.example.zerobase_project_1.domain.RowList" %><%--
   Created by IntelliJ IDEA.
