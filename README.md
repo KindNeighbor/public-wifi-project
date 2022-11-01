@@ -9,3 +9,5 @@
 - 10.31 select 기능 추가, 현재위치로 부터 거리 추가
 - 11.1 검색 목록 테이블 추가, 목록 개별 삭제 기능 추가
 - 11.2 리펙토링
+
+![misson1_ERD](https://user-images.githubusercontent.com/97837003/199247237-5eaffe52-45fc-4280-b208-d2633cbb6159.jpg)
