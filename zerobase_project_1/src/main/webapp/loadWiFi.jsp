@@ -20,7 +20,7 @@
         DbController dbController = new DbController();
         String startIdx = "1";
         String endIdx = "1000";
-        for (int i = 0; i < 18; i++) {
+        for (int i = 0; i < 2; i++) {
             publicWiFiAPI.GetPublicWiFiOpenAPI(startIdx, endIdx);
             publicWiFiAPI.getItemList();
 

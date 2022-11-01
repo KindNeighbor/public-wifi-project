@@ -3,6 +3,7 @@ package com.example.zerobase_project_1;
 import com.example.zerobase_project_1.db.DbController;
 import com.example.zerobase_project_1.domain.Item;
 import com.example.zerobase_project_1.domain.RowList;
+import com.example.zerobase_project_1.domain.SearchHistory;
 import com.google.gson.*;
 
 import java.io.BufferedReader;
@@ -57,6 +58,13 @@ public class Test {
         DbController dbController = new DbController();
 //        dbController.dbInsert();
 //        dbController.dbDelete();
+        dbController.dbSelectHistory();
+        for (SearchHistory searchHistory : dbController.historyList) {
+            System.out.println(searchHistory.getID());
+            System.out.println(searchHistory.getLAT1());
+            System.out.println(searchHistory.getLAT1());
+            System.out.println(searchHistory.getSearch_date());
+        }
     }
 
     public void getItemList1() {
