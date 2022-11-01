@@ -10,4 +10,4 @@
 - 11.1 검색 목록 테이블 추가, 목록 개별 삭제 기능 추가
 - 11.2 리펙토링
 
-![misson1_ERD](https://user-images.githubusercontent.com/97837003/199247237-5eaffe52-45fc-4280-b208-d2633cbb6159.jpg)
+![misson1_ERD1](https://user-images.githubusercontent.com/97837003/199248043-ac83bd60-16ad-4c2c-b0a1-5b1280ddd7c6.png)
