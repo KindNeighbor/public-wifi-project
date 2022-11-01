@@ -1,6 +1,7 @@
 <%@ page import="com.example.zerobase_project_1.openAPI.PublicWiFiAPI" %>
 <%@ page import="com.example.zerobase_project_1.db.DbController" %>
-<%@ page import="com.example.zerobase_project_1.domain.RowList" %><%--
+<%@ page import="com.example.zerobase_project_1.domain.RowList" %>
+<%@ page import="com.example.zerobase_project_1.domain.SearchHistory" %><%--
   Created by IntelliJ IDEA.
   User: USER
   Date: 2022-10-30
@@ -10,24 +11,87 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>공공와이파이 정보 삭제</title>
+    <title>와이파이 정보 구하기</title>
+    <%
+        DbController dbController = new DbController();
+        String id = request.getParameter("id");
+        String lat1 = request.getParameter("lat1");
+        String lnt1 = request.getParameter("lnt1");
+        String time = request.getParameter("time");
+        dbController.dbDeleteHistory(id, lat1, lnt1, time);
+    %>
+
+    <style>
+        table {
+            width: 100%;
+        }
+        th {
+            border: solid 1px #000;
+            text-align: center;
+            background-color: #04AA6D;
+            color: white;
+        }
+        tr:nth-child(even) {background-color: #f2f2f2;}
+        td {
+            border: solid 1px #000;
+            text-align: center;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-    <%
-        PublicWiFiAPI publicWiFiAPI = new PublicWiFiAPI();
-        publicWiFiAPI.GetPublicWiFiOpenAPI();
-        publicWiFiAPI.getItemList();
-        DbController dbController = new DbController();
+    <h1>
+        <%
+            out.write("위치 히스토리 목록");
+        %>
+    </h1>
+    <h1 style="font-size: 15px">
+        <a href="hello.jsp">홈 |</a>
+        <a href="history.jsp">위치 히스토리 목록 |</a>
+        <a href="loadWiFi.jsp">Open API 와이파이 정보 가져오기</a>
+    </h1>
 
-        for (RowList a : publicWiFiAPI.newList) {
-            dbController.dbDelete(a.getX_SWIFI_MGR_NO(), a.getX_SWIFI_WRDOFC(), a.getX_SWIFI_ADRES1(),
-                    a.getX_SWIFI_ADRES2(), a.getX_SWIFI_INSTL_FLOOR(), a.getX_SWIFI_INSTL_TY(), a.getX_SWIFI_INSTL_TY(),
-                    a.getX_SWIFI_INSTL_MBY(), a.getX_SWIFI_SVC_SE(), a.getX_SWIFI_CMCWR(), a.getX_SWIFI_CNSTC_YEAR(),
-                    a.getX_SWIFI_INOUT_DOOR(), a.getX_SWIFI_REMARS3(), a.getLAT(), a.getLNT(), a.getWORK_DTTM());
-        }
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>X좌표</th>
+            <th>Y좌표</th>
+            <th>조회일자</th>
+            <th>비고</th>
 
-        out.write("와이파이 정보를 DB에서 전부 삭제했습니다.");
-    %>
-    <a href="hello.jsp">홈으로</a>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+
+         <% dbController.dbSelectHistory(); %>
+            <% for (SearchHistory rowList : dbController.historyList) { %>
+        <tr>
+            <td>
+                <% out.write(rowList.getID()); %>
+            </td>
+            <td>
+                <% out.write(rowList.getLAT1()); %>
+            </td>
+            <td>
+                <% out.write(rowList.getLNT1()); %>
+            </td>
+            <td>
+                <% out.write(rowList.getSearch_date()); %>
+            </td>
+            <td>
+                <form action="deleteInfo.jsp">
+                    <input type="hidden" name="id" value="<%=rowList.getID()%>">
+                    <input type="hidden" name="lat1" value="<%=rowList.getLAT1()%>">
+                    <input type="hidden" name="lnt1" value="<%=rowList.getLNT1()%>">
+                    <input type="hidden" name="time" value="<%=rowList.getSearch_date()%>">
+                    <input type="submit" value="삭제" onclick="getParameter()">
+                </form>
+            </td>
+            <%}%>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>

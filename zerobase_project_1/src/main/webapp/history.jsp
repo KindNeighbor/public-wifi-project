@@ -15,6 +15,7 @@
         DbController dbController = new DbController();
     %>
 
+
     <style>
         table {
             width: 100%;
@@ -60,21 +61,35 @@
     </thead>
     <tbody>
     <tr>
-        <%
-            dbController.dbSelectHistory();
+        <% dbController.dbSelectHistory(); %>
 
-            for (SearchHistory rowList : dbController.historyList) {
-                out.write("<tr>");
-                out.write("<td>" + rowList.getID() + "</td>");
-                out.write("<td>" + rowList.getLAT1() + "</td>");
-                out.write("<td>" + rowList.getLNT1() + "</td>");
-                out.write("<td>" + rowList.getSearch_date() + "</td>");
-                out.write("</tr>");
-            }
-        %>
+            <% for (SearchHistory rowList : dbController.historyList) { %>
+                <tr>
+                    <td>
+                        <% out.write(rowList.getID()); %>
+                    </td>
+                    <td>
+                        <% out.write(rowList.getLAT1()); %>
+                    </td>
+                    <td>
+                        <% out.write(rowList.getLNT1()); %>
+                    </td>
+                    <td>
+                        <% out.write(rowList.getSearch_date()); %>
+                    </td>
+                    <td>
+                        <form action="deleteInfo.jsp">
+                            <input type="hidden" name="id" value="<%=rowList.getID()%>">
+                            <input type="hidden" name="lat1" value="<%=rowList.getLAT1()%>">
+                            <input type="hidden" name="lnt1" value="<%=rowList.getLNT1()%>">
+                            <input type="hidden" name="time" value="<%=rowList.getSearch_date()%>">
+                            <input type="submit" value="삭제" onclick="getParameter()">
+                        </form>
+                    </td>
+            <%}%>
+        </tr>
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>

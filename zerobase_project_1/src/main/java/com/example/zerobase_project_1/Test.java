@@ -58,13 +58,7 @@ public class Test {
         DbController dbController = new DbController();
 //        dbController.dbInsert();
 //        dbController.dbDelete();
-        dbController.dbSelectHistory();
-        for (SearchHistory searchHistory : dbController.historyList) {
-            System.out.println(searchHistory.getID());
-            System.out.println(searchHistory.getLAT1());
-            System.out.println(searchHistory.getLAT1());
-            System.out.println(searchHistory.getSearch_date());
-        }
+        dbController.dbDeleteHistory("1", "37.51936", "126.9006336", "2022-11-01T14:41:56.393");
     }
 
     public void getItemList1() {

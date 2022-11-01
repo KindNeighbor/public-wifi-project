@@ -119,8 +119,7 @@ public class DbController {
             String select_sql = " SELECT " +
                     "ID, LAT1, LNT1, search_date " +
                     "FROM SearchHistory " +
-                    "order by ID desc " +
-                    "LIMIT 20 ";
+                    "order by ID desc ";
 
             historyList = new ArrayList<>();
             ResultSet rs = stmt.executeQuery(select_sql);

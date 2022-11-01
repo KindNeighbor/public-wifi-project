@@ -23,7 +23,6 @@
 
         function getPosition() {
             navigator.geolocation.getCurrentPosition(function(pos) {
-                console.log(pos);
                 var latitude = pos.coords.latitude;
                 var longitude = pos.coords.longitude;
                 document.getElementById("lat").value = latitude;
