@@ -50,7 +50,6 @@ public class PublicWiFiAPI {
         }
         rd.close();
         conn.disconnect();
-//        System.out.println(sb.toString());
         json = sb.toString();
 
     }

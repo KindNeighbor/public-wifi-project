@@ -1,11 +1,5 @@
 <%@ page import="com.example.zerobase_project_1.domain.RowListWithDistance" %>
-<%@ page import="com.example.zerobase_project_1.db.DbController" %><%--
-  Created by IntelliJ IDEA.
-  User: USER
-  Date: 2022-10-31
-  Time: 오후 7:56
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.zerobase_project_1.db.DbController" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +22,6 @@
                 document.getElementById("lat").value = latitude;
                 document.getElementById("lnt").value = longitude;
             }); }
-
 
     </script>
 

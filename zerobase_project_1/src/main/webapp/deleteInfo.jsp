@@ -1,13 +1,7 @@
 <%@ page import="com.example.zerobase_project_1.openAPI.PublicWiFiAPI" %>
 <%@ page import="com.example.zerobase_project_1.db.DbController" %>
 <%@ page import="com.example.zerobase_project_1.domain.RowList" %>
-<%@ page import="com.example.zerobase_project_1.domain.SearchHistory" %><%--
-  Created by IntelliJ IDEA.
-  User: USER
-  Date: 2022-10-30
-  Time: 오후 7:39
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.zerobase_project_1.domain.SearchHistory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -66,30 +60,31 @@
         <tr>
 
          <% dbController.dbSelectHistory(); %>
+
             <% for (SearchHistory rowList : dbController.historyList) { %>
-        <tr>
-            <td>
-                <% out.write(rowList.getID()); %>
-            </td>
-            <td>
-                <% out.write(rowList.getLAT1()); %>
-            </td>
-            <td>
-                <% out.write(rowList.getLNT1()); %>
-            </td>
-            <td>
-                <% out.write(rowList.getSearch_date()); %>
-            </td>
-            <td>
-                <form action="deleteInfo.jsp">
-                    <input type="hidden" name="id" value="<%=rowList.getID()%>">
-                    <input type="hidden" name="lat1" value="<%=rowList.getLAT1()%>">
-                    <input type="hidden" name="lnt1" value="<%=rowList.getLNT1()%>">
-                    <input type="hidden" name="time" value="<%=rowList.getSearch_date()%>">
-                    <input type="submit" value="삭제" onclick="getParameter()">
-                </form>
-            </td>
-            <%}%>
+                <tr>
+                    <td>
+                        <% out.write(rowList.getID()); %>
+                    </td>
+                    <td>
+                        <% out.write(rowList.getLAT1()); %>
+                    </td>
+                    <td>
+                        <% out.write(rowList.getLNT1()); %>
+                    </td>
+                    <td>
+                        <% out.write(rowList.getSearch_date()); %>
+                    </td>
+                    <td>
+                        <form action="deleteInfo.jsp">
+                            <input type="hidden" name="id" value="<%=rowList.getID()%>">
+                            <input type="hidden" name="lat1" value="<%=rowList.getLAT1()%>">
+                            <input type="hidden" name="lnt1" value="<%=rowList.getLNT1()%>">
+                            <input type="hidden" name="time" value="<%=rowList.getSearch_date()%>">
+                            <input type="submit" value="삭제" onclick="getParameter()">
+                        </form>
+                    </td>
+                <%}%>
         </tr>
         </tbody>
     </table>

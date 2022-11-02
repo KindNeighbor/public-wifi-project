@@ -1,26 +1,24 @@
 <%@ page import="com.example.zerobase_project_1.openAPI.PublicWiFiAPI" %>
 <%@ page import="com.example.zerobase_project_1.db.DbController" %>
-<%@ page import="com.example.zerobase_project_1.domain.RowList" %><%--
-  Created by IntelliJ IDEA.
-  User: USER
-  Date: 2022-10-30
-  Time: 오전 2:10
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.zerobase_project_1.domain.RowList" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta content="text/html; charset=UTF-8" />
-    <title>공공와이파이 정보 저장 성공!</title>
+    <title>와이파이 정보 구하기</title>
 </head>
 <body>
     <%
         PublicWiFiAPI publicWiFiAPI = new PublicWiFiAPI();
         DbController dbController = new DbController();
+        dbController.dbDeleteAll(); // 데이터가 중복해서 쌓이는 것 방지
         String startIdx = "1";
         String endIdx = "1000";
-        for (int i = 0; i < 2; i++) {
+        publicWiFiAPI.GetPublicWiFiOpenAPI("1", "1");
+        publicWiFiAPI.getItemList(); // 전체 갯수 정보 불러오기 위해서 한개만 일단 호출
+        int cnt = Integer.parseInt(publicWiFiAPI.count) / 1000; // 한번에 1000개 초과해서 요청 불가능
+        for (int i = 0; i < cnt + 1; i++) {
             publicWiFiAPI.GetPublicWiFiOpenAPI(startIdx, endIdx);
             publicWiFiAPI.getItemList();
 
@@ -34,8 +32,12 @@
             endIdx = String.valueOf(Integer.parseInt(endIdx) + 1000);
         }
 
-        out.write("와이파이 정보 " + publicWiFiAPI.count + "개를 DB에 저장했습니다.");
-    %>
-    <a href="hello.jsp">홈으로</a>
+        %>
+    <div style="font-size: 30px; text-align: center">
+        <% out.write(publicWiFiAPI.count + "개의 WIFI 정보를 정상적으로 저장하였습니다."); %>
+    </div> <br>
+    <div style="font-size: 20px; text-align: center">
+        <a href="hello.jsp">홈으로</a>
+    </div>
 </body>
 </html>

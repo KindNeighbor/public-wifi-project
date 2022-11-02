@@ -20,7 +20,6 @@
             document.getElementById("lnt").value = longitude;
         }); }
 
-
     </script>
 
     <style>

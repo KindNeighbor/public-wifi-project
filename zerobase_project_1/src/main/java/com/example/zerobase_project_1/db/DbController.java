@@ -7,15 +7,36 @@ import com.example.zerobase_project_1.domain.SearchHistory;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class DbController {
     public ArrayList<RowListWithDistance> selectList;
     public ArrayList<SearchHistory> historyList;
 
-    public String lat;
-    public String lnt;
-//    Test test = new Test();
+    public void dbDeleteAll() {
+        String url = "jdbc:sqlite:C:/Users/USER/testdb1.db";
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try{
+
+            con = DriverManager.getConnection(url);
+
+            String deleteAll_sql = "DELETE FROM PublicWifiAPIInfo ";
+
+            stmt = con.prepareStatement(deleteAll_sql);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void dbSelect(String lat, String lnt) {
 
@@ -36,8 +57,8 @@ public class DbController {
 
 
             String select_sql = " SELECT " +
-                    "(6371 * acos(cos(radians(VAR_LAT)) * cos(radians(LAT)) * cos(radians(LNT) - " +
-                    "radians(VAR_LNT)) + sin(radians(VAR_LAT)) * sin(radians(LAT)))) AS distance, " +
+                    "round((6371 * acos(cos(radians(VAR_LAT)) * cos(radians(LAT)) * cos(radians(LNT) - " +
+                    "radians(VAR_LNT)) + sin(radians(VAR_LAT)) * sin(radians(LAT)))), 4) AS distance, " +
                     "X_SWIFI_MGR_NO, X_SWIFI_WRDOFC, X_SWIFI_MAIN_NM, " +
                     "X_SWIFI_ADRES1, X_SWIFI_ADRES2, X_SWIFI_INSTL_FLOOR, " +
                     "X_SWIFI_INSTL_TY, X_SWIFI_INSTL_MBY, X_SWIFI_SVC_SE, " +
@@ -46,7 +67,7 @@ public class DbController {
                     "FROM PublicWifiAPIInfo " +
                     "WHERE distance < 2 " +
                     "order by distance asc " +
-                    "LIMIT 20 ";
+                    "LIMIT 40 ";
 
             selectList = new ArrayList<>();
             ResultSet rs = stmt.executeQuery(select_sql);

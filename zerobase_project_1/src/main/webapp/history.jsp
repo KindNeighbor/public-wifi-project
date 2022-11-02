@@ -1,11 +1,5 @@
 <%@ page import="com.example.zerobase_project_1.db.DbController" %>
-<%@ page import="com.example.zerobase_project_1.domain.SearchHistory" %><%--
-  Created by IntelliJ IDEA.
-  User: USER
-  Date: 2022-10-31
-  Time: 오전 11:46
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.zerobase_project_1.domain.SearchHistory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,7 +8,6 @@
     <%
         DbController dbController = new DbController();
     %>
-
 
     <style>
         table {
@@ -33,7 +26,6 @@
             height: 50px;
         }
     </style>
-
 </head>
 <body>
 
