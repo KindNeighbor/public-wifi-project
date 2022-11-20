@@ -10,4 +10,6 @@
 - 11.1 검색 목록 테이블 추가, 목록 개별 삭제 기능 추가
 - 11.2 api 새로 추가시 기존 데이터 초기화 기능 추가
 
+### ERD
+
 ![misson1_ERD1](https://user-images.githubusercontent.com/97837003/199248043-ac83bd60-16ad-4c2c-b0a1-5b1280ddd7c6.png)
