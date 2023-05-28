@@ -1,4 +1,4 @@
-# zerobase_project_1
+# public wifi project
 
 ### 프로젝트 기간
 #### 10.28 ~ 11.2
